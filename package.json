@@ -10,5 +10,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^4.1.4"
+  },
+  "dependencies": {
+    "oauth-electron-twitter": "^1.0.29"
   }
 }
