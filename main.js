@@ -1,21 +1,32 @@
-const { app, BrowserWindow } = require('electron')
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win
+let frontWindow;
+app.commandLine.appendSwitch("ignore-certificate-errors");
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  const screenSize = electron.screen.getPrimaryDisplay().workAreaSize;
+  frontWindow = new BrowserWindow({
+    left: 0,
+    top: 0,
+    width: screenSize.width,
+    height: screenSize.height,
+    transparent: true,
+    frame: false,
+    hasShadow: false,
+    alwaysOnTop: true
+  });
 
-  // and load the index.html of the app.
-  win.loadFile('index.html')
-
-  // Open the DevTools.
-  // win.webContents.openDevTools()
-
-  // Emitted when the window is closed.
-  win.on('closed', () => {
+  frontWindow.loadFile('index.html')
+  frontWindow.webContents.openDevTools()
+  frontWindow.setAlwaysOnTop(true, "screen-saver");
+  frontWindow.setIgnoreMouseEvents(true);
+  frontWindow.maximize();
+  frontWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
