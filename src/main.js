@@ -21,7 +21,7 @@ function createWindow () {
     alwaysOnTop: true
   });
 
-  frontWindow.loadFile('index.html')
+  frontWindow.loadFile('static/index.html')
   frontWindow.webContents.openDevTools()
   frontWindow.setAlwaysOnTop(true, "screen-saver");
   frontWindow.setIgnoreMouseEvents(true);
