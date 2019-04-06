@@ -1,0 +1,14 @@
+{
+  "name": "commentscreen_electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Toshiki Tomihira",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.1.4"
+  }
+}
