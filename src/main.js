@@ -20,7 +20,7 @@ function startSession(tag) {
     screens.recieve(text);
   });
   twitter.start(tag, (text) => {
-    screens.recieve(text)
+    screens.recieve(text);
   })
 };
 
@@ -31,7 +31,7 @@ ipcMain.on('send', (event, text) => {
 
 ipcMain.on('changeTag', (event, tagName) => {
   socket.disconnect();
-  // twitter.diesconect
+  twitter.disconnect();
   startSession(tagName);
   store.set('TagName', tagName);
 });
