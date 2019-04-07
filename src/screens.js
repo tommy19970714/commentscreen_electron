@@ -1,5 +1,5 @@
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const { BrowserWindow } = electron;
 const utility = require('./utility');
 
 var frontWindows = new Array();
@@ -15,7 +15,7 @@ exports.recieve = function (text) {
     }
 }
 
-function createFrontWindows() {
+exports.createFrontWindows = function () {
     var electronScreen = electron.screen;
     var displays = electronScreen.getAllDisplays();
     for (var i in displays) {
@@ -43,5 +43,3 @@ function createFrontWindows() {
         frontWindows.push(win);
     }
 }
-
-app.on('ready', createFrontWindows);
