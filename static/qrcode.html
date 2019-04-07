@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>QRCode</title>
+    <link rel="stylesheet" type="text/css" href="style/qrcode.css" />
+    <script src="script/qrcode.min.js"></script>
+</head>
+
+<body>
+    <div id="qrcode" class="qrcode"></div>
+    <script type="text/javascript">
+        var options = {
+            text: 'https://example.com',
+            width: Math.min(window.innerWidth - 20, window.innerHeight - 20),
+            height: Math.min(window.innerWidth - 20, window.innerHeight - 20),
+            correctLevel: QRCode.CorrectLevel.H
+        };
+        
+        var qrcode = document.getElementById("qrcode");
+        new QRCode(qrcode, options);
+    </script>
+</body>
+</html>
