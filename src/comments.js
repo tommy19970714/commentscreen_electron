@@ -3,7 +3,8 @@ class CommentStage {
         this.width = width;
         this.height = height - 70;
         var stage = new createjs.Stage(stageName);
-        this.container = new createjs.Container();
+        var container = new createjs.Container();
+        this.container = container;
         stage.addChild(this.container);
         stage.update();
 
@@ -21,6 +22,10 @@ class CommentStage {
                 let line = lines[y];
                 for (var z = 0; z < line.length; z++) {
                     line[z].x -= (((line[z].text.length * Math.floor(height / 11)) + width) / 10) / 80;
+                    if (line[z].x < -line[z].text.length * Math.floor(height / 11)) {
+                        container.removeChild(line[z]);
+                        line.splice(z, 1);
+                    }
                 }
             }
 
@@ -32,6 +37,10 @@ class CommentStage {
                     emojis[y].alpha -= 0.004;
                 } else {
                     emojis[y].alpha -= 0.05;
+                }
+                if(emojis[y].alpha < 0) {
+                    container.removeChild(emojis[y]);
+                    emojis.splice(y, 1);
                 }
             }
             stage.update();
