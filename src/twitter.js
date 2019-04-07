@@ -21,7 +21,20 @@ function authTwitter () {
     let userTokens = store.get('TwitterCredentials')
     if (userTokens) {
         // Twitter Already Authenticated
-        console.log(userTokens)
+        const twitterClient = new Twitter({
+            consumer_key: info.key,
+            consumer_secret: info.secret,
+            access_token_key: userTokens.token,
+            access_token_secret: userTokens.tokenSecret
+        })
+        twitterClient.stream('statuses/filter', {track: 'javascript'}, (stream) => {
+            stream.on('data', (event) => {
+                console.log(event && event.text)
+            })
+            stream.on('error', (error)=> {
+                throw error
+            })
+        })
     } else {
         // Authenticate Twitter
         let win = new BrowserWindow({
