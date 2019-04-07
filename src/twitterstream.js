@@ -20,21 +20,30 @@ let info = {
 
 function getTwitterClient () {
     let userTokens = store.get('TwitterCredentials')
-    let twitterClient = new Twitter({
-        consumer_key: info.key,
-        consumer_secret: info.secret,
-        access_token_key: userTokens.token,
-        access_token_secret: userTokens.tokenSecret
-    })
-    return twitterClient
+    if (userTokens) {
+        let twitterClient = new Twitter({
+            consumer_key: info.key,
+            consumer_secret: info.secret,
+            access_token_key: userTokens.token,
+            access_token_secret: userTokens.tokenSecret
+        })
+        return twitterClient
+    } else {
+        return null
+    }
 }
 
 let twitterStream
 
 exports.start = function (tag ,handler) {
-    let twitterClient = getTwitterClient()
-    console.log(tag)
     if (tag) {
+        let twitterClient = getTwitterClient()
+        if (!twitterClient) {
+            // ログイン状態に関わらずmain.jsはスタートを呼ぶため、
+            // 認証が保存されていない＝認証していないユーザーに対しては
+            // TwitterStreamを取得しない。ユーザが利用したくない場合もあるため。
+            return null
+        }
         twitterClient.stream('statuses/filter', {track: tag}, (stream) => {
             twitterStream = stream
             twitterStream.on('data', (tweet) => {
@@ -57,6 +66,8 @@ exports.start = function (tag ,handler) {
 }
 
 exports.disconnect = function() {
-    twitterStream.destroy()
+    if (twitterStream) {
+        twitterStream.destroy()
+    }
     console.log("twitter stream destroied");
 }
