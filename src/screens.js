@@ -1,12 +1,23 @@
-const { BrowserWindow } = require('electron').remote
-
 const electron = require('electron');
+const { app, BrowserWindow } = electron;
+const utility = require('./utility');
 
-window.addEventListener('load', (event) => {
+var frontWindows = new Array();
 
+exports.recieve = function (text) {
+    for (var i in frontWindows) {
+        console.log(frontWindows[i]);
+        if (text.match(utility.emojiRanges)) {
+            frontWindows[i].webContents.send('emoji', text);
+        } else {
+            frontWindows[i].webContents.send('comment', text);
+        }
+    }
+}
+
+function createFrontWindows() {
     var electronScreen = electron.screen;
     var displays = electronScreen.getAllDisplays();
-
     for (var i in displays) {
         // Create the browser window.
         let win = new BrowserWindow({
@@ -24,11 +35,13 @@ window.addEventListener('load', (event) => {
         win.setAlwaysOnTop(true, "screen-saver");
         win.setIgnoreMouseEvents(true);
         win.maximize();
+        // win.webContents.openDevTools();
 
         win.on('close', () => { win = null })
-        win.loadURL('static/front.html');
+        win.loadFile('static/front.html');
         win.show();
-
-        console.log("loaded");
+        frontWindows.push(win);
     }
-})
+}
+
+app.on('ready', createFrontWindows);

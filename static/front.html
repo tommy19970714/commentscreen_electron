@@ -8,8 +8,26 @@
 </head>
 
 <body>
-
+    <canvas class="commentCanvas" width="870px" height="480px" id="commentCanvas"></canvas>
 </body>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="../src/comments.js"></script>
+<script type="text/javascript">
+    // const comments = require('../src/comments');
+    const electron = require('electron');
 
+    var canvas = document.getElementById("commentCanvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var commentscreen = new CommentStage('commentCanvas', canvas.width, canvas.height);
+
+    electron.ipcRenderer.on('comment', (event, message) => {
+        commentscreen.insertText(message);
+    });
+    
+    electron.ipcRenderer.on('emoji', (event, message) => {
+        commentscreen.insertEmoji(message);
+    });
+</script>
 </html>
-
