@@ -284,3 +284,11 @@ body, html {
 		top: 40%;
 	} */
 }
+
+.tag_msg {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    border: 0 !important;
+    color: white !important;
+    height: 40px !important;
+    overflow-y: auto;
+}

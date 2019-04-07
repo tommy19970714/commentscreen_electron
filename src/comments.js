@@ -74,7 +74,7 @@ class CommentStage {
 
     isInsert(line) {
         for (var i = 0; i < line.length; i++) {
-            if (line[i].x + line[i].text.length * Math.floor(this.height / 11) > this.width / 2) {
+            if (line[i].x + line[i].text.length * Math.floor(this.height / 11) > this.width) {
                 return false;
             }
         }

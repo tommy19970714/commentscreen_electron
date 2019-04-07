@@ -5,15 +5,32 @@ const {app, ipcMain, BrowserWindow} = electron;
 
 const socket = require('./mysocket');
 const screens = require('./screens');
+const Store = require('./store.js');
 
-socket.start( (handler) => {
-    screens.recieve(handler);
+const store = new Store({
+  configName: 'TagName',
+  defaults: {
+    TagName: {}
+  }
 });
+
+function startSession(tag) {
+  socket.start(tag, (handler) => {
+    screens.recieve(handler);
+  });
+};
 
 ipcMain.on('send', (event, text) => {
   socket.send(text);
   screens.recieve(text);
-})
+  mainWindow.webContents.send('setTag', text);
+});
+
+ipcMain.on('changeTag', (event, tagName) => {
+  socket.disconnect();
+  startSession(tagName);
+  store.set('TagName', tagName);
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,6 +47,12 @@ function createWindow () {
     mainWindow = null;
   })
   mainWindow.webContents.openDevTools();
+  mainWindow.webContents.once('dom-ready', () => {
+    const tag = store.get('TagName');
+    startSession(tag);
+    mainWindow.webContents.send('setTag', tag);
+    console.log("tagname: " + tag);
+  });
 
   screens.createFrontWindows();
 }
