@@ -4,26 +4,28 @@ const auth = require('oauth-electron-twitter')
 const Store = require('./store.js')
 require('dotenv').config()
 
+const store = new Store({
+    configName: 'CommentScreenTwitterAuth',
+    defaults: {
+        Credentials: {}
+    }
+})
 
 let info = {
     key: process.env.TWITTER_APP_TOKEN,
     secret: process.env.TWITTER_APP_SECRET,
 }
 
-// app.on('ready', () => {
-// })
-
 function authTwitter () {
-    console.log('aaa')
-    console.log(info)
     let win = new BrowserWindow({
         webPreferences: {nodeIntegration: false}
     })
-    console.log(win)
-    console.log(app.getPath('userData'))
     auth.login(info, win).then(result => {
-        console.log(result)
+        store.set('TwitterCredentials', result)
+        win.close()
     })
+    console.log('Credentials:')
+    console.log(store.get('TwitterCredentials'))
 }
 
 
