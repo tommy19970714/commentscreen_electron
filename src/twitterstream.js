@@ -29,27 +29,34 @@ function getTwitterClient () {
     return twitterClient
 }
 
+let twitterStream
+
 exports.start = function (tag ,handler) {
     let twitterClient = getTwitterClient()
+    console.log(tag)
     if (tag) {
         twitterClient.stream('statuses/filter', {track: tag}, (stream) => {
-            stream.on('data', (tweet) => {
+            twitterStream = stream
+            twitterStream.on('data', (tweet) => {
                 // テキストを整理
                 // ツイート本文に指定したtagが含まれている場合だけ処理する
-                if (tweet.text.indexOf(tag) >= 0) {
+                // ツイートがリプライの場合は取り除く
+                // ツイートがリツイートの場合は取り除く
+                if (tweet.text.indexOf(tag) >= 0 && !tweet.in_reply_to_status_id && !tweet.retweeted_status) {
                     handler(tweet.text)
                 }
             })
-            stream.on('error', (error)=> {
-                throw error
-                // console.log('error happened in twitter.start')
-                // console.log(error)
+            twitterStream.on('error', (error)=> {
+                // 頻出すぎるキーワードを投げると420の原因になると思われる
+                // https://twittercommunity.com/t/streaming-api-hits-420-very-often/14757/2
+                console.log(error)
+                handler('ざわざわ…')
             })
         })
     }
 }
 
 exports.disconnect = function() {
-    // socket.disconnect();
-    console.log("disconnected");
+    twitterStream.destroy()
+    console.log("twitter stream destroied");
 }
