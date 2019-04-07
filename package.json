@@ -14,5 +14,6 @@
   },
   "dependencies": {
     "oauth-electron-twitter": "^1.0.29"
+    "socket.io-client": "^2.2.0"
   }
 }
