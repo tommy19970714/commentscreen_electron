@@ -2,6 +2,7 @@ const electron = require('electron')
 const { BrowserWindow} = require('electron').remote
 const auth = require('oauth-electron-twitter')
 const Store = require('./store.js')
+const Twitter = require('twitter')
 require('dotenv').config()
 
 const store = new Store({
@@ -17,13 +18,20 @@ let info = {
 }
 
 function authTwitter () {
-    let win = new BrowserWindow({
-        webPreferences: {nodeIntegration: false}
-    })
-    auth.login(info, win).then(result => {
-        store.set('TwitterCredentials', result)
-        win.close()
-    })
+    let userTokens = store.get('TwitterCredentials')
+    if (userTokens) {
+        // Twitter Already Authenticated
+        console.log(userTokens)
+    } else {
+        // Authenticate Twitter
+        let win = new BrowserWindow({
+            webPreferences: {nodeIntegration: false}
+        })
+        auth.login(info, win).then(resultTokens => {
+            store.set('TwitterCredentials', resultTokens)
+            win.close()
+        })
+    }
 }
 
 
