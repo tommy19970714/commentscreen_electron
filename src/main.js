@@ -26,6 +26,8 @@ function createWindow () {
     mainWindow = null;
   })
   mainWindow.webContents.openDevTools();
+
+  screens.createFrontWindows();
 }
 
 // This method will be called when Electron has finished
