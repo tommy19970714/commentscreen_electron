@@ -6,18 +6,22 @@ const {app, ipcMain, BrowserWindow} = electron;
 const socket = require('./mysocket');
 const screens = require('./screens');
 const Store = require('./store.js');
+const twitter = require('./twitterstream.js');
 
 const store = new Store({
   configName: 'CommentScreen',
   defaults: {
-    TagName: {}
+    TagName: ''
   }
 });
 
 function startSession(tag) {
-  socket.start(tag, (handler) => {
-    screens.recieve(handler);
+  socket.start(tag, (text) => {
+    screens.recieve(text);
   });
+  twitter.start(tag, (text) => {
+    screens.recieve(text)
+  })
 };
 
 ipcMain.on('send', (event, text) => {
@@ -27,6 +31,7 @@ ipcMain.on('send', (event, text) => {
 
 ipcMain.on('changeTag', (event, tagName) => {
   socket.disconnect();
+  // twitter.diesconect
   startSession(tagName);
   store.set('TagName', tagName);
 });
