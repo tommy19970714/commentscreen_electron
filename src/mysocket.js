@@ -12,6 +12,12 @@ exports.start = function (handler) {
     })
 }
 
+exports.send = function (text) {
+    const array = makeJson(text);
+    var jsonStr = JSON.stringify(array);
+    socket.emit('message', jsonStr);
+}
+
 function makeJson(text) {
     return {
         position: "opt_ue",
@@ -19,9 +25,4 @@ function makeJson(text) {
         color: "#190707",
         text: text
     };
-}
-
-function sendSocket(array) {
-    var jsonStr = JSON.stringify(array);
-    socket.emit('message', jsonStr);
 }
