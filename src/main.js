@@ -8,7 +8,7 @@ const screens = require('./screens');
 const Store = require('./store.js');
 
 const store = new Store({
-  configName: 'TagName',
+  configName: 'CommentScreen',
   defaults: {
     TagName: {}
   }

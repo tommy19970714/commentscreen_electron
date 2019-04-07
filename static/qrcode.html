@@ -11,8 +11,16 @@
 <body>
     <div id="qrcode" class="qrcode"></div>
     <script type="text/javascript">
+        const Store = require('../src/store.js');
+        const store = new Store({
+            configName: 'CommentScreen',
+            defaults: {
+                TagName: {}
+            }
+        });
+        const tag = store.get('TagName');
         var options = {
-            text: 'https://example.com',
+            text: 'https://commentscreen.com/comments?room=' + tag,
             width: Math.min(window.innerWidth - 20, window.innerHeight - 20),
             height: Math.min(window.innerWidth - 20, window.innerHeight - 20),
             correctLevel: QRCode.CorrectLevel.H
