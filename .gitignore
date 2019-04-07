@@ -80,3 +80,7 @@ typings/
 .dynamodb/
 
 .DS_Store
+
+# build files
+dist/
+yarn.lock
