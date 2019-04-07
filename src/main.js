@@ -23,7 +23,6 @@ function startSession(tag) {
 ipcMain.on('send', (event, text) => {
   socket.send(text);
   screens.recieve(text);
-  mainWindow.webContents.send('setTag', text);
 });
 
 ipcMain.on('changeTag', (event, tagName) => {
