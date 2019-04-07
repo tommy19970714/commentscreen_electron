@@ -1,20 +1,43 @@
 {
-  "name": "commentscreen_electron",
+  "name": "commentscreen",
+  "productName": "CommentScreen",
+  "copyright": "Copyright © 2019 Toshiki Tomihira",
   "version": "1.0.0",
-  "description": "",
+  "description": "You can give a presentation while talking with the audience since their comments appear over your screen",
   "main": "./src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "Toshiki Tomihira",
   "license": "MIT",
   "devDependencies": {
-    "dotenv": "^7.0.0",
-    "electron": "^4.1.4"
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0"
   },
   "dependencies": {
+    "dotenv": "^7.0.0",
     "oauth-electron-twitter": "^1.0.29",
     "socket.io-client": "^2.2.0",
     "twitter": "^1.7.1"
+  },
+  "build": {
+    "appId": "com.electron.commentscreen",
+    "mac": {
+      "category": "public.app-category.business"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    }
   }
 }
