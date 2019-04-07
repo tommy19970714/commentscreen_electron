@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
 
+
 //コメントのinput field
 var input_filed = document.getElementById("input-comment");
 var message_area = document.getElementById("messages-area");
@@ -7,7 +8,15 @@ var card_area = document.getElementById("card-area");
 var tag = document.getElementById("tag-name");
 var ua = navigator.userAgent;
 
-tag.innerText = "#EVENT";
+ipcRenderer.on('setTag', (event, tagName) => {
+    tag.value = tagName;
+})
+
+tag.addEventListener("change", function (event) {
+    ipcRenderer.send('changeTag', tag.value);
+    console.log("changed tag: " + tag.value);
+});
+
 input_filed.onfocus = function () {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
