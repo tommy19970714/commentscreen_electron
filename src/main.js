@@ -44,7 +44,7 @@ let mainWindow;
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
 function createWindow () {
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow = new BrowserWindow({ width: 520, height: 600 });
   mainWindow.loadFile('static/index.html');
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -52,7 +52,7 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null;
   })
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
   mainWindow.webContents.once('dom-ready', () => {
     const tag = store.get('TagName');
     startSession(tag);
