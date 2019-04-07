@@ -9,6 +9,7 @@
   "author": "Toshiki Tomihira",
   "license": "MIT",
   "devDependencies": {
+    "dotenv": "^7.0.0",
     "electron": "^4.1.4"
   },
   "dependencies": {
