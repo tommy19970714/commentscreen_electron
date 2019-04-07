@@ -1,22 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
 
-    <div class="container">
-      <button id="auth-twitter">Twitter認証をする</button>
+<head>
+  <title>CommentScreen</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="style/post-comments.css" rel="stylesheet">
+  <link href="style/emoji-menu.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+<body>
+  <canvas class="commentCanvas" width="100px" height="100px" id="commentCanvas"></canvas>
+  <div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+
+      <div class="col-md-8 col-xl-6 chat" id="card-area">
+        <div class="card">
+          <div class="card-header msg_head">
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <img src="img/bg-img/Logo.png" class="user_img">
+              </div>
+              <div class="user_info">
+                <span id="tag-name">#Event</span>
+              </div>
+              <div class="video_cam">
+                <span id="auth-twitter"><i class="fab fa-twitter"></i></span>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-body msg_card_body" id="messages-area">
+
+          </div>
+          <div class="card-footer">
+            <div class="input-group">
+              <div class="input-group-append">
+                <!-- <span class="input-group-text attach_btn"><i class="fas fa-smile-wink"></i></span> -->
+                <nav class="input-group-text attach_btn">
+                  <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+                  <label class="menu-open-button" for="menu-open">
+                    <span class="hamburger hamburger-1"></span>
+                    <span class="hamburger hamburger-2"></span>
+                    <span class="hamburger hamburger-3"></span>
+                    <span class="emoji"><i class="fas fa-smile-wink"></i></span>
+                  </label>
+
+                  <span class="menu-item" id="hart-emoji" onclick="clickEmoji('💗', 'hart-emoji');">💗</span>
+                  <span class="menu-item" id="smile-emoji" onclick="clickEmoji('😆', 'smile-emoji');"> 😆</span>
+                  <span class="menu-item" id="good-emoji" onclick="clickEmoji('👍', 'good-emoji');"> 👍</span>
+                  <span class="menu-item" id="cry-emoji" onclick="clickEmoji('😭', 'cry-emoji');"> 😭</span>
+                </nav>
+              </div>
+
+              <input type="text" name="password" id="input-comment" class="form-control type_msg" maxlength="75">
+              <div class="input-group-append">
+                <span class="input-group-text send_btn" onclick="clickComment();"><i
+                    class="fas fa-location-arrow"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    </body>
-    
-    <script type="text/javascript">
-      require('../src/twitter');
-    </script>
-  </body>
+  </div>
+</body>
+<script src="script/messenger.js"></script>
+
 </html>

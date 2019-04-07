@@ -1,8 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const {app, ipcMain, BrowserWindow} = electron;
 
 const socket = require('./mysocket');
 const screens = require('./screens');
@@ -10,6 +9,11 @@ const screens = require('./screens');
 socket.start( (handler) => {
     screens.recieve(handler);
 });
+
+ipcMain.on('send', (event, text) => {
+  socket.send(text);
+  screens.recieve(text);
+})
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
