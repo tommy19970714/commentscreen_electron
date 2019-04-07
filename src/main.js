@@ -18,10 +18,12 @@ const store = new Store({
 function startSession(tag) {
   socket.start(tag, (text) => {
     screens.recieve(text);
+    mainWindow.webContents.send('receive', text);
   });
   twitter.start(tag, (text) => {
     screens.recieve(text);
-  })
+    mainWindow.webContents.send('receive', text);
+  });
 };
 
 ipcMain.on('send', (event, text) => {

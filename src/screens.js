@@ -7,7 +7,7 @@ var frontWindows = new Array();
 exports.recieve = function (text) {
     for (var i in frontWindows) {
         console.log(frontWindows[i]);
-        if (text.match(utility.emojiRanges)) {
+        if (text.match(utility.emojiRanges) && text.length <= 3) {
             frontWindows[i].webContents.send('emoji', text);
         } else {
             frontWindows[i].webContents.send('comment', text);

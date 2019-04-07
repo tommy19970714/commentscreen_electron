@@ -12,6 +12,10 @@ ipcRenderer.on('setTag', (event, tagName) => {
     tag.value = tagName;
 })
 
+ipcRenderer.on('receive', (event, message) => {
+    appendRecieveMessage(message);
+})
+
 tag.addEventListener("change", function (event) {
     ipcRenderer.send('changeTag', tag.value);
     console.log("changed tag: " + tag.value);
