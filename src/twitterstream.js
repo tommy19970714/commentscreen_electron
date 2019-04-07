@@ -33,9 +33,12 @@ exports.start = function (tag ,handler) {
     let twitterClient = getTwitterClient()
     if (tag) {
         twitterClient.stream('statuses/filter', {track: tag}, (stream) => {
-            stream.on('data', (event) => {
-                // TODO: テキストを整理
-                handler(event.text)
+            stream.on('data', (tweet) => {
+                // テキストを整理
+                // ツイート本文に指定したtagが含まれている場合だけ処理する
+                if (tweet.text.indexOf(tag) >= 0) {
+                    handler(tweet.text)
+                }
             })
             stream.on('error', (error)=> {
                 throw error
@@ -47,6 +50,6 @@ exports.start = function (tag ,handler) {
 }
 
 exports.disconnect = function() {
-    socket.disconnect();
+    // socket.disconnect();
     console.log("disconnected");
 }
