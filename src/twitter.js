@@ -1,5 +1,5 @@
 const electron = require('electron')
-const { app, BrowserWindow} = require('electron').remote
+const { BrowserWindow} = require('electron').remote
 const auth = require('oauth-electron-twitter')
 const Store = require('./store.js')
 require('dotenv').config()
@@ -24,13 +24,10 @@ function authTwitter () {
         store.set('TwitterCredentials', result)
         win.close()
     })
-    console.log('Credentials:')
-    console.log(store.get('TwitterCredentials'))
 }
 
 
 const newWindowBtn = document.getElementById('auth-twitter')
 newWindowBtn.addEventListener('click', (event) => {
-    console.log(Store)
     authTwitter()
 })
