@@ -29,15 +29,21 @@ exports.createFrontWindows = function () {
             frame: false,
             titleBarStyle: 'hidden',
             hasShadow: false,
-            alwaysOnTop: true
+            alwaysOnTop: true,
+            minimizable: false,
+            maximizable: false,
+            closable: false,
+            focusable: false,
+            skipTaskbar: true,
+            titleBarStyle: "customButtonsOnHover"
         });
 
         win.setAlwaysOnTop(true, "screen-saver");
+        win.setVisibleOnAllWorkspaces(true);
         win.setIgnoreMouseEvents(true);
         win.maximize();
         // win.webContents.openDevTools();
 
-        win.on('close', () => { win = null })
         win.loadFile('static/front.html');
         win.show();
         frontWindows.push(win);
