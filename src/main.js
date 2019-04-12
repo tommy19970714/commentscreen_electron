@@ -2,6 +2,7 @@
 
 const electron = require('electron');
 const {app, ipcMain, BrowserWindow} = electron;
+require('./auto-update');
 
 const socket = require('./mysocket');
 const screens = require('./screens');
