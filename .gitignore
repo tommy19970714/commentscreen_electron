@@ -84,3 +84,6 @@ typings/
 # build files
 dist/
 yarn.lock
+
+# env file
+src/env.js

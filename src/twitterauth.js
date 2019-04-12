@@ -4,7 +4,7 @@ const electron = require('electron')
 const { BrowserWindow} = electron.remote
 const auth = require('oauth-electron-twitter')
 const Store = require('./store.js')
-require('dotenv').config()
+const { token, secret } = require('./env.js')
 
 const store = new Store({
     configName: 'CommentScreen',
@@ -14,8 +14,8 @@ const store = new Store({
 })
 
 let info = {
-    key: process.env.TWITTER_APP_TOKEN,
-    secret: process.env.TWITTER_APP_SECRET,
+    key: token,
+    secret: secret,
 }
 
 function authTwitter () {
