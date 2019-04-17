@@ -7,8 +7,8 @@
   "main": "./src/main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "pack": "electron-builder --mac --win",
+    "dist-release": "electron-builder --win --mac --publish always"
   },
   "author": "Toshiki Tomihira",
   "license": "MIT",
