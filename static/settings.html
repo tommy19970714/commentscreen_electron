@@ -14,12 +14,18 @@
         const Store = require('electron-store');
         const store = new Store();
 
+        function switchColor(name, base, alternative) {
+            // get color by name, with base as default
+            var color = store.get(name) || base;
+            // switch color between base and alternative
+            color = color === base ? alternative : base;
+            // update to storage
+            store.set(name, color);
+        }
+
         function changeTextColor() {
-            var textOutlineColor = store.get('text-outline-color') || "black";
-            textOutlineColor = textOutlineColor === "black" ? "white" : "black";
-            store.set('text-outline-color', textOutlineColor);
-            console.log('haha');
-            console.log(textOutlineColor);
+            switchColor('text-inline-color', "white", "black");
+            switchColor('text-outline-color', "black", "white");
         }
     </script>
 </body>
