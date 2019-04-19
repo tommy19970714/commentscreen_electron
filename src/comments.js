@@ -1,3 +1,6 @@
+const Store = require('electron-store');
+const store = new Store();
+
 class CommentStage {
     constructor(stageName, width, height) {
         this.width = width;
@@ -49,7 +52,10 @@ class CommentStage {
 
     insertText(comment) {
         console.log("insert text loaded");
-        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", "black");
+        // Default outline color set to black
+        var textOutlineColor = store.get('text-outline-color') || "black";
+        console.log(textOutlineColor);
+        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", textOutlineColor);
         textOutline.x = this.width;
         textOutline.outline = 4;
         
