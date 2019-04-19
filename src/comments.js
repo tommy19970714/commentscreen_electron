@@ -61,7 +61,9 @@ class CommentStage {
         
         var textInline = textOutline.clone();
         textInline.outline = false;
-        textInline.color = "white";
+        // Default inline color set to white
+        var textInlineColor = store.get('text-inline-color') || "white";
+        textInline.color = textInlineColor;
 
         for (var y = 0; y < 11; y++) {
             if (this.isInsert(this.lines[y]) == true) {
