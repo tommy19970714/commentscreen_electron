@@ -9,10 +9,18 @@
 </head>
 
 <body>
-    <button>Black/White</button>
+    <button onclick="changeTextColor();">Black/White</button>
     <script type="text/javascript">
         const Store = require('electron-store');
         const store = new Store();
+
+        function changeTextColor() {
+            var textOutlineColor = store.get('text-outline-color') || "black";
+            textOutlineColor = textOutlineColor === "black" ? "white" : "black";
+            store.set('text-outline-color', textOutlineColor);
+            console.log('haha');
+            console.log(textOutlineColor);
+        }
     </script>
 </body>
 </html>
