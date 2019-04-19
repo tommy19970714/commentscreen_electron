@@ -49,14 +49,22 @@ class CommentStage {
 
     insertText(comment) {
         console.log("insert text loaded");
-        var text = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", "#000000");
-        text.alpha = 0.5;
-        text.x = this.width;
+        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", "black");
+        textOutline.x = this.width;
+        textOutline.outline = 4;
+        
+        var textInline = textOutline.clone();
+        textInline.outline = false;
+        textInline.color = "white";
+
         for (var y = 0; y < 11; y++) {
             if (this.isInsert(this.lines[y]) == true) {
-                text.y = (this.height / 11) * y;
-                this.lines[y].push(text);
-                this.container.addChild(text);
+                textOutline.y = (this.height / 11) * y;
+                textInline.y = (this.height / 11) * y;
+                this.lines[y].push(textOutline);
+                this.lines[y].push(textInline);
+                this.container.addChild(textOutline);
+                this.container.addChild(textInline);
                 break;
             }
         }
