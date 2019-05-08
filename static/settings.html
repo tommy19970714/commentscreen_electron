@@ -12,7 +12,7 @@
     <button onclick="changeTextColorWhite();">White(Default)</button>
     <button onclick="changeTextColorBlack();">Black</button>
     <br>
-    <input type="color" id="inline-color-picker" value="#000000">
+    <input type="color" id="inline-color-picker" value="#ffffff">
     <label for="inline-color-picker">Inline</label>
     <input type="color" id="outline-color-picker" value="#000000">
     <label for="outline-color-picker">Outline</label>
@@ -30,14 +30,30 @@
             store.set(name, color);
         }
 
+        function reflectColorPicker() {
+            var inColor = store.get('text-inline-color') || "#ffffff";
+            var inline = document.getElementById('inline-color-picker');
+            inline.value = inColor;
+            var outColor = store.get('text-outline-color') || "#000000";
+            var outline = document.getElementById('outline-color-picker');
+            outline.value = outColor;
+        }
+
         function changeTextColorWhite() {
-            store.set('text-inline-color', "white")
-            store.set('text-outline-color', "black")
+            store.set('text-inline-color', "#ffffff")
+            store.set('text-outline-color', "#000000")
+            reflectColorPicker();
         }
 
         function changeTextColorBlack() {
-            store.set('text-inline-color', "black")
-            store.set('text-outline-color', "white")
+            store.set('text-inline-color', "#000000")
+            store.set('text-outline-color', "#ffffff")
+            reflectColorPicker();
+        }
+
+        window.onload = () => {
+            alert("haha")
+            reflectColorPicker();
         }
     </script>
 </body>
