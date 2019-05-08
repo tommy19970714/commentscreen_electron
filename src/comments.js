@@ -24,8 +24,10 @@ class CommentStage {
             for (var y = 0; y < lines.length; y++) {
                 let line = lines[y];
                 for (var z = 0; z < line.length; z++) {
-                    line[z].x -= (((line[z].text.length * Math.floor(height / 11)) + width) / 10) / 80;
-                    if (line[z].x < -line[z].text.length * Math.floor(height / 11)) {
+                    let textlength = line[z].getChildAt(0).text.length;
+                    line[z].x -= (((textlength * Math.floor(height / 11)) + width) / 10) / 80;
+                    
+                    if (line[z].x < -textlength * Math.floor(height / 11)) {
                         container.removeChild(line[z]);
                         line.splice(z, 1);
                     }
@@ -52,12 +54,10 @@ class CommentStage {
 
     insertText(comment) {
         console.log("insert text loaded");
+        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", textOutlineColor);
         // Default outline color set to black
         var textOutlineColor = store.get('text-outline-color') || "black";
-        console.log(textOutlineColor);
-        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", textOutlineColor);
-        textOutline.x = this.width;
-        textOutline.outline = 4;
+        textOutline.outline = 2;
         
         var textInline = textOutline.clone();
         textInline.outline = false;
@@ -67,12 +67,13 @@ class CommentStage {
 
         for (var y = 0; y < 11; y++) {
             if (this.isInsert(this.lines[y]) == true) {
-                textOutline.y = (this.height / 11) * y;
-                textInline.y = (this.height / 11) * y;
-                this.lines[y].push(textOutline);
-                this.lines[y].push(textInline);
-                this.container.addChild(textOutline);
-                this.container.addChild(textInline);
+                var textview = new createjs.Container();
+                textview.x = this.width;
+                textview.y = (this.height / 11) * y;
+                textview.addChild(textInline);
+                textview.addChild(textOutline);
+                this.lines[y].push(textview);
+                this.container.addChild(textview);
                 break;
             }
         }
@@ -99,7 +100,8 @@ class CommentStage {
 
     isInsert(line) {
         for (var i = 0; i < line.length; i++) {
-            if (line[i].x + line[i].text.length * Math.floor(this.height / 11) > this.width) {
+            let textlength = line[i].getChildAt(0).text.length;
+            if (line[i].x + textlength * Math.floor(this.height / 11) > this.width) {
                 return false;
             }
         }
