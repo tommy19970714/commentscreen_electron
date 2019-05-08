@@ -32,7 +32,6 @@ exports.createFrontWindows = function () {
             alwaysOnTop: true,
             minimizable: false,
             maximizable: false,
-            closable: false,
             focusable: false,
             skipTaskbar: true,
             titleBarStyle: "customButtonsOnHover"
