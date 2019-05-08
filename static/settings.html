@@ -9,7 +9,14 @@
 </head>
 
 <body>
-    <button onclick="changeTextColor();">Black/White</button>
+    <button onclick="changeTextColorWhite();">White(Default)</button>
+    <button onclick="changeTextColorBlack();">Black</button>
+    <br>
+    <input type="color" id="inline-color-picker" value="#000000">
+    <label for="inline-color-picker">Inline</label>
+    <input type="color" id="outline-color-picker" value="#000000">
+    <label for="outline-color-picker">Outline</label>
+
     <script type="text/javascript">
         const Store = require('electron-store');
         const store = new Store();
@@ -23,9 +30,14 @@
             store.set(name, color);
         }
 
-        function changeTextColor() {
-            switchColor('text-inline-color', "white", "black");
-            switchColor('text-outline-color', "black", "white");
+        function changeTextColorWhite() {
+            store.set('text-inline-color', "white")
+            store.set('text-outline-color', "black")
+        }
+
+        function changeTextColorBlack() {
+            store.set('text-inline-color', "black")
+            store.set('text-outline-color', "white")
         }
     </script>
 </body>
