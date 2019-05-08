@@ -30,13 +30,22 @@
             store.set(name, color);
         }
 
+        const inlinePicker = document.getElementById('inline-color-picker');
+        const outlinePicker = document.getElementById('outline-color-picker');
+
+        inlinePicker.addEventListener('change', (e) => {
+            store.set('text-inline-color', e.target.value);
+        }, false);
+
+        outlinePicker.addEventListener('change', (e) => {
+            store.set('text-outline-color', e.target.value);
+        }, false);
+
         function reflectColorPicker() {
             var inColor = store.get('text-inline-color') || "#ffffff";
-            var inline = document.getElementById('inline-color-picker');
-            inline.value = inColor;
+            inlinePicker.value = inColor;
             var outColor = store.get('text-outline-color') || "#000000";
-            var outline = document.getElementById('outline-color-picker');
-            outline.value = outColor;
+            outlinePicker.value = outColor;
         }
 
         function changeTextColorWhite() {
