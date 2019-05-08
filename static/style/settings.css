@@ -23,3 +23,7 @@ input[type="color"].form-control {
     background-color: #ececec;
     padding: 2px; 
 }
+
+#fontsize {
+    width: 64px;
+}

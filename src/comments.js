@@ -54,9 +54,11 @@ class CommentStage {
 
     insertText(comment) {
         console.log("insert text loaded");
-        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", textOutlineColor);
+        // Default fontsize set to 60
+        var textSize = store.get('text-fontsize') || 60;
         // Default outline color set to black
         var textOutlineColor = store.get('text-outline-color') || "black";
+        var textOutline = new createjs.Text(comment, textSize + "px Arial", textOutlineColor);
         textOutline.outline = 2;
         
         var textInline = textOutline.clone();

@@ -3,7 +3,7 @@ const { BrowserWindow } = electron.remote;
 
 function openSettingsWindow() {
     let win = new BrowserWindow({
-        width: 400, height: 400
+        width: 320, height: 360
     });
     win.on('close', () => { win = null })
     win.loadFile('static/settings.html');
