@@ -54,9 +54,8 @@ const template = [
         { type: 'separator' },
         {
             label: 'Preferences',
-            click () {
-              openSettingsWindow()
-            }
+            accelerator: 'Cmd+,', 
+            click () { openSettingsWindow() }
         },
         { role: 'services' },
         { type: 'separator' },
@@ -64,7 +63,10 @@ const template = [
         { role: 'hideothers' },
         { role: 'unhide' },
         { type: 'separator' },
-        { role: 'quit' }
+        { 
+             role: 'quit',
+             accelerator: 'Cmd+Q', 
+        }
       ]
     })
   
