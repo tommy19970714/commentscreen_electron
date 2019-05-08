@@ -1,3 +1,6 @@
+const Store = require('electron-store');
+const store = new Store();
+
 class CommentStage {
     constructor(stageName, width, height) {
         this.width = width;
@@ -51,12 +54,18 @@ class CommentStage {
 
     insertText(comment) {
         console.log("insert text loaded");
-        var textOutline = new createjs.Text(comment, Math.floor(this.height / 11) - 12 + "px Arial", "black");
+        // Default fontsize set to 60
+        var textSize = store.get('text-fontsize') || 60;
+        // Default outline color set to black
+        var textOutlineColor = store.get('text-outline-color') || "black";
+        var textOutline = new createjs.Text(comment, textSize + "px Arial", textOutlineColor);
         textOutline.outline = 2;
         
         var textInline = textOutline.clone();
         textInline.outline = false;
-        textInline.color = "white";
+        // Default inline color set to white
+        var textInlineColor = store.get('text-inline-color') || "white";
+        textInline.color = textInlineColor;
 
         for (var y = 0; y < 11; y++) {
             if (this.isInsert(this.lines[y]) == true) {

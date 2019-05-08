@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style/qrcode.css" /> -->
+    <!-- <script src="script/qrcode.min.js"></script> -->
+    <link href="style/settings.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="container" class="container">
+        <h3 class="title">Text Color</h3>
+        <div class="settings-element">
+            <input type="color" id="inline-color-picker" value="#ffffff" class="form-control">
+            <label for="inline-color-picker">Inline</label>
+        </div>
+        <div class="settings-element">
+            <input type="color" id="outline-color-picker" value="#000000" class="form-control">
+            <label for="outline-color-picker">Outline</label>
+        </div>
+        <div class="settings-element">
+            <button onclick="changeTextColorWhite();" class="btn btn-outline-secondary btn-sm">White (Default)</button>
+            <button onclick="changeTextColorBlack();" class="btn btn-outline-secondary btn-sm">Black</button>
+        </div>
+
+        <hr>
+
+        <h3>Font Size</h3>
+        <div>
+            <input type="number" id="fontsize" class="form-control">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const Store = require('electron-store');
+        const store = new Store();
+
+        function switchColor(name, base, alternative) {
+            // get color by name, with base as default
+            var color = store.get(name) || base;
+            // switch color between base and alternative
+            color = color === base ? alternative : base;
+            // update to storage
+            store.set(name, color);
+        }
+
+        const inlinePicker = document.getElementById('inline-color-picker');
+        const outlinePicker = document.getElementById('outline-color-picker');
+        const textFontsize = document.getElementById('fontsize');
+
+        inlinePicker.addEventListener('change', (e) => {
+            store.set('text-inline-color', e.target.value);
+        }, false);
+
+        outlinePicker.addEventListener('change', (e) => {
+            store.set('text-outline-color', e.target.value);
+        }, false);
+
+        textFontsize.addEventListener('change', (e) => {
+            store.set('text-fontsize', e.target.value)
+        })
+
+        function reflectColorPicker() {
+            var inColor = store.get('text-inline-color') || "#ffffff";
+            inlinePicker.value = inColor;
+            var outColor = store.get('text-outline-color') || "#000000";
+            outlinePicker.value = outColor;
+        }
+
+        function reflectFontsize() {
+            var fontsize = store.get('text-fontsize') || 60;
+            textFontsize.value = fontsize;
+        }
+
+        function changeTextColorWhite() {
+            store.set('text-inline-color', "#ffffff")
+            store.set('text-outline-color', "#000000")
+            reflectColorPicker();
+        }
+
+        function changeTextColorBlack() {
+            store.set('text-inline-color', "#000000")
+            store.set('text-outline-color', "#ffffff")
+            reflectColorPicker();
+        }
+
+        window.onload = () => {
+            reflectColorPicker();
+            reflectFontsize();
+        }
+    </script>
+</body>
+</html>

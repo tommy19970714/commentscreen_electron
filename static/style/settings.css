@@ -1,0 +1,30 @@
+* {
+    font-family: "sans-serif";
+    font-family: "arial";
+    background-color: #ececec;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+#container {
+    padding-top: 16px;
+}
+
+.settings-element {
+    margin-bottom: 12px;
+}
+
+input[type="color"].form-control {
+    height: 28px;
+    width: 48px !important;
+    display: inline !important;
+    background-color: #ececec;
+    padding: 2px; 
+}
+
+#fontsize {
+    height: 28px;
+    width: 64px;
+}

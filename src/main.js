@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const {app, ipcMain, BrowserWindow} = electron;
+const {app, ipcMain, BrowserWindow, Menu, MenuItem} = electron;
 require('./auto-update');
 
 const socket = require('./mysocket');
