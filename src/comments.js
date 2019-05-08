@@ -57,14 +57,14 @@ class CommentStage {
         // Default fontsize set to 60
         var textSize = store.get('text-fontsize') || 60;
         // Default outline color set to black
-        var textOutlineColor = store.get('text-outline-color') || "black";
+        var textOutlineColor = store.get('text-outline-color') || "#000000";
         var textOutline = new createjs.Text(comment, textSize + "px Arial", textOutlineColor);
         textOutline.outline = 2;
         
         var textInline = textOutline.clone();
         textInline.outline = false;
         // Default inline color set to white
-        var textInlineColor = store.get('text-inline-color') || "white";
+        var textInlineColor = store.get('text-inline-color') || "#ffffff";
         textInline.color = textInlineColor;
 
         for (var y = 0; y < 11; y++) {
