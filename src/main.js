@@ -16,6 +16,83 @@ const store = new Store({
   }
 });
 
+// Menu template
+const template = [
+    {
+      label: 'Edit',
+      submenu: [
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'delete' },
+        { role: 'selectall' }
+      ]
+    },
+    {
+      role: 'window',
+      submenu: [
+        { role: 'minimize' },
+        { role: 'close' }
+      ]
+    },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click () { require('electron').shell.openExternal('https://commentscreen.com/') }
+        }
+      ]
+    }
+  ]
+  
+  if (process.platform === 'darwin') {
+    template.unshift({
+      label: app.getName(),
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        {
+            label: 'Preferences',
+            accelerator: 'Cmd+,', 
+            click () { openSettingsWindow() }
+        },
+        { role: 'services' },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { 
+             role: 'quit',
+             accelerator: 'Cmd+Q', 
+        }
+      ]
+    })
+  
+    // 編集メニュー
+    template[1].submenu.push(
+      { type: 'separator' },
+      {
+        label: 'Speech',
+        submenu: [
+          { role: 'startspeaking' },
+          { role: 'stopspeaking' }
+        ]
+      }
+    )
+  
+    // ウインドウメニュー
+    template[2].submenu = [
+      { role: 'close' },
+      { role: 'minimize' },
+      { role: 'zoom' },
+      { type: 'separator' },
+      { role: 'front' }
+    ]
+  }
+
+
 function startSession(tag) {
   socket.start(tag, (text) => {
     screens.recieve(text);
@@ -62,6 +139,19 @@ function createWindow () {
   });
 
   screens.createFrontWindows();
+  // Menu
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+}
+
+// This function exists in settings.js too
+function openSettingsWindow() {
+    let win = new BrowserWindow({
+        width: 320, height: 360
+    });
+    win.on('close', () => { win = null })
+    win.loadFile('static/settings.html');
+    win.show();
 }
 
 // This method will be called when Electron has finished
