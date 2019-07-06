@@ -21,10 +21,10 @@ input[type="color"].form-control {
     width: 48px !important;
     display: inline !important;
     background-color: #ececec;
-    padding: 2px; 
+    padding: 2px;
 }
 
-#fontsize {
+#fontsize, #textspeed {
     height: 28px;
     width: 64px;
 }
