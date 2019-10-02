@@ -124,6 +124,7 @@ app.commandLine.appendSwitch("ignore-certificate-errors");
 function createWindow () {
   mainWindow = new BrowserWindow({ width: 520, height: 600 });
   mainWindow.loadFile('static/index.html');
+  // mainWindow.webContents.openDevTools()
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
