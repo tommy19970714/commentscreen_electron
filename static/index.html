@@ -9,12 +9,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="style/post-comments.css" rel="stylesheet">
   <link href="style/emoji-menu.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/17.0.16/i18next.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.0/i18nextXHRBackend.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/3.0.3/i18nextBrowserLanguageDetector.js"></script>
+  <!-- <script src="node_modules/i18next/i18next.js"></script> -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
     integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <script>
+    i18next
+        .use(i18nextXHRBackend)
+        .use(i18nextBrowserLanguageDetector)
+        .init({
+          fallbackLng: 'en',
+          debug: true,
+          ns: ['common'],
+          defaultNS: 'common',
+          backend: {
+            // load from i18next-gitbook repo
+            loadPath: './locales/{{lng}}/{{ns}}.json',
+            crossDomain: true
+          }
+        }, function (err, t) {
+          // init set content
+          console.log(i18next.t("tutorial.first"));
+          $("#first").text(i18next.t("tutorial.first"));
+          $("#second").text(i18next.t("tutorial.second"));
+          $("#third").text(i18next.t("tutorial.third"));
+          $("#fourth").text(i18next.t("tutorial.fourth"));
+          $("#fifth").text(i18next.t("tutorial.fifth"));
+        });
+  </script>
 </head>
 
 <body>
@@ -47,6 +77,40 @@
           </div>
           <div class="card-body msg_card_body" id="messages-area">
 
+            <div class="d-flex justify-content-start mb-4">
+              <div class="msg_cotainer" id="first">
+                <span class="msg_time">
+                </span>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-start mb-4">
+              <div class="msg_cotainer" id="second">
+                <span class="msg_time">
+                </span>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-start mb-4">
+              <div class="msg_cotainer" id="third">
+                <span class="msg_time">
+                </span>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-start mb-4">
+              <div class="msg_cotainer" id="fourth">
+                <span class="msg_time">
+                </span>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-start mb-4">
+              <div class="msg_cotainer" id="fifth">
+                <span class="msg_time">
+                </span>
+              </div>
+            </div>
           </div>
           <div class="card-footer">
             <div class="input-group">
@@ -63,7 +127,7 @@
 
                   <span class="menu-item" id="hart-emoji" onclick="clickEmoji('💗', 'hart-emoji');">💗</span>
                   <span class="menu-item" id="smile-emoji" onclick="clickEmoji('😆', 'smile-emoji');"> 😆</span>
-                  <span class="menu-item" id="good-emoji" onclick="clickEmoji('👍', 'good-emoji');"> 👍</span>
+                  <span class="menu-item" id="good-emoji" onclick="clickEmoji('👝', 'good-emoji');"> 👝</span>
                   <span class="menu-item" id="cry-emoji" onclick="clickEmoji('😭', 'cry-emoji');"> 😭</span>
                 </nav>
               </div>
