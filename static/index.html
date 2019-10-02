@@ -37,6 +37,17 @@
           jqueryI18next.init(i18next, $);
             $('[data-i18n]').localize();
         });
+    const {shell} = require('electron');
+    async function openCommentScreen() {
+      var tagName = document.getElementById('tag-name').value;
+      var url = 'https://commentscreen.com/comments?room=' + tagName;
+      await shell.openExternal(url);
+    }
+    function focusTag() {
+      window.setTimeout(()=>{
+        $('#tag-name').focus();
+      }, 0);
+    }
   </script>
 </head>
 
@@ -70,14 +81,14 @@
           </div>
           <div class="card-body msg_card_body" id="messages-area">
 
-            <div class="d-flex justify-content-start mb-4">
-              <div class="msg_cotainer" data-i18n="tutorial.first">
+            <div class="d-flex justify-content-start mb-4" onclick="focusTag();">
+              <div class="msg_cotainer" data-i18n="[html]tutorial.first">
                 <span class="msg_time">
                 </span>
               </div>
             </div>
 
-            <div class="d-flex justify-content-start mb-4">
+            <div class="d-flex justify-content-start mb-4" onclick="openCommentScreen()">
               <div class="msg_cotainer" data-i18n="tutorial.second">
                 <span class="msg_time">
                 </span>
