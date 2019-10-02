@@ -1,7 +1,7 @@
 {
     "tutorial": {
-        "first": "First, input your hashtag.",
-        "second": "Second, open website.",
+        "first": "First, input your <u style='color: blue'>hashtag</u>.",
+        "second": "Second, <u style='color: blue'>open website</u>.",
         "third": "Third, you can see comments on the screen when someone posts.",
         "fourth": "You can share the website using QR code",
         "fifth": "If you want to display twitter tweets, log in and enable it."
