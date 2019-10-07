@@ -130,6 +130,7 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+    quit();
   })
   // mainWindow.webContents.openDevTools();
   mainWindow.webContents.once('dom-ready', () => {
@@ -140,6 +141,10 @@ function createWindow () {
   });
 
   screens.createFrontWindows();
+  electron.screen.on('display-added', renewFrontWindows);
+  electron.screen.on('display-removed', renewFrontWindows);
+  electron.screen.on('display-metrics-changed', renewFrontWindows);
+
   // Menu
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
@@ -155,6 +160,18 @@ function openSettingsWindow() {
     win.show();
 }
 
+function renewFrontWindows() {
+  console.log("renew windows");
+  screens.closeFrontWindows();
+  screens.createFrontWindows();
+}
+
+function quit() {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -164,9 +181,7 @@ app.on('ready', createWindow);
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  quit();
 })
 
 app.on('activate', () => {

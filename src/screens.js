@@ -15,9 +15,17 @@ exports.recieve = function (text) {
     }
 }
 
+exports.closeFrontWindows = function () {
+    for (var win in frontWindows) {
+        win.close();
+    }
+    var frontWindows = new Array();
+}
+
 exports.createFrontWindows = function () {
     var electronScreen = electron.screen;
     var displays = electronScreen.getAllDisplays();
+
     for (var i in displays) {
         // Create the browser window.
         let win = new BrowserWindow({
@@ -27,6 +35,7 @@ exports.createFrontWindows = function () {
             width: displays[i].bounds.width,
             transparent: true,
             frame: false,
+            closable: true,
             titleBarStyle: 'hidden',
             hasShadow: false,
             alwaysOnTop: true,
