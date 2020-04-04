@@ -57,16 +57,16 @@ class CommentStage {
         console.log("insert text loaded");
         // Default fontsize set to 60
         var textSize = store.get('text-fontsize') || 60;
+
         // Default outline color set to black
-        var textOutlineColor = store.get('text-outline-color') || "#000000";
-        var textOutline = new createjs.Text(comment, textSize + "px Arial", textOutlineColor);
-        textOutline.outline = 2;
+        // var textOutlineColor = store.get('text-outline-color') || "#000000";
+        // var textOutline = new createjs.Text(comment, textSize + "px Arial", textOutlineColor);
+        // textOutline.outline = 2;
         
-        var textInline = textOutline.clone();
-        textInline.outline = false;
         // Default inline color set to white
         var textInlineColor = store.get('text-inline-color') || "#ffffff";
-        textInline.color = textInlineColor;
+        var textInline = new createjs.Text(comment, textSize + "px Arial", textInlineColor)
+        textInline.outline = false;
 
         for (var y = 0; y < 11; y++) {
             if (this.isInsert(this.lines[y]) == true) {
@@ -74,7 +74,6 @@ class CommentStage {
                 textview.x = this.width;
                 textview.y = (this.height / 11) * y;
                 textview.addChild(textInline);
-                textview.addChild(textOutline);
                 this.lines[y].push(textview);
                 this.container.addChild(textview);
                 break;
