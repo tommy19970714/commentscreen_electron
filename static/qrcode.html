@@ -11,13 +11,8 @@
 <body>
     <div id="qrcode" class="qrcode"></div>
     <script type="text/javascript">
-        const Store = require('../src/store.js');
-        const store = new Store({
-            configName: 'CommentScreen',
-            defaults: {
-                TagName: {}
-            }
-        });
+        const Store = require('electron-store');
+        const store = new Store();
         const tag = store.get('TagName');
         var options = {
             text: 'https://commentscreen.com/comments?room=' + tag,
