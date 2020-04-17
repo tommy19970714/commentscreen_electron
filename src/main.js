@@ -7,6 +7,7 @@ require('./auto-update');
 const socket = require('./mysocket');
 const screens = require('./screens');
 const Store = require('electron-store');
+const store = new Store()
 const twitter = require('./twitterstream.js');
 
 

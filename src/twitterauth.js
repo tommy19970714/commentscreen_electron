@@ -3,15 +3,10 @@
 const electron = require('electron')
 const { BrowserWindow} = electron.remote
 const auth = require('oauth-electron-twitter')
-const Store = require('./store.js')
+const Store = require('electron-store')
+const store = new Store()
 const { token, secret } = require('./env.js')
 
-const store = new Store({
-    configName: 'CommentScreen',
-    defaults: {
-        Credentials: {}
-    }
-})
 
 let info = {
     key: token,
