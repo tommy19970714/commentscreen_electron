@@ -1,6 +1,7 @@
 'use strict';
 
 const electron = require('electron');
+const { is } = require('electron-util');
 const {app, ipcMain, BrowserWindow, Menu, MenuItem} = electron;
 require('./auto-update');
 
@@ -161,7 +162,7 @@ function renewFrontWindows() {
 }
 
 function quit() {
-  if (process.platform !== 'darwin') {
+  if (!is.macos) {
     app.quit();
   }
 }
