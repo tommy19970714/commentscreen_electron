@@ -6,15 +6,9 @@ require('./auto-update');
 
 const socket = require('./mysocket');
 const screens = require('./screens');
-const Store = require('./store.js');
+const Store = require('electron-store');
 const twitter = require('./twitterstream.js');
 
-const store = new Store({
-  configName: 'CommentScreen',
-  defaults: {
-    TagName: ''
-  }
-});
 
 // Menu template
 const template = [
