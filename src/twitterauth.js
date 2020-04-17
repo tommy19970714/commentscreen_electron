@@ -14,20 +14,14 @@ let info = {
 }
 
 function authTwitter () {
-    let userTokens = store.get('TwitterCredentials')
-    if (userTokens) {
-        // Twitter Already Authenticated
-        console.log('Tokens found. Already Authenticated.')
-    } else {
-        // Authenticate Twitter
-        let win = new BrowserWindow({
-            webPreferences: {nodeIntegration: false}
-        })
-        auth.login(info, win).then(resultTokens => {
-            store.set('TwitterCredentials', resultTokens)
-            win.close()
-        })
-    }
+    // Authenticate Twitter
+    let win = new BrowserWindow({
+        webPreferences: {nodeIntegration: false}
+    })
+    auth.login(info, win).then(resultTokens => {
+        store.set('TwitterCredentials', resultTokens)
+        win.close()
+    })
 }
 
 
