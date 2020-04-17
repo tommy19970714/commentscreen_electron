@@ -26,6 +26,10 @@
             <button onclick="changeTextColorWhite();" class="btn btn-outline-secondary btn-sm">White (Default)</button>
             <button onclick="changeTextColorBlack();" class="btn btn-outline-secondary btn-sm">Black</button>
         </div>
+        <div class="settings-element">
+            <input type="checkbox" name="text-show-outline" id="text-show-outline">
+            <label for="text-show-outline">Show outline</label>
+        </div>
 
         <hr>
 
@@ -59,6 +63,7 @@
         const outlinePicker = document.getElementById('outline-color-picker');
         const textFontsize = document.getElementById('fontsize');
         const textSpeed = document.getElementById('textspeed');
+        const showOutline = document.getElementById('text-show-outline')
 
         inlinePicker.addEventListener('change', (e) => {
             store.set('text-inline-color', e.target.value);
@@ -74,6 +79,10 @@
 
         textSpeed.addEventListener('change', (e) => {
             store.set('text-speed', e.target.value)
+        });
+
+        showOutline.addEventListener('change', (e) => {
+            store.set('text-show-outline', e.target.checked)
         });
 
         function reflectColorPicker() {
@@ -93,6 +102,11 @@
             textSpeed.value = textspeed;
         }
 
+        function reflectShowOutline() {
+            var showoutline = store.get('text-show-outline') || true;
+            showOutline.checked = showoutline;
+        }
+
         function changeTextColorWhite() {
             store.set('text-inline-color', "#ffffff")
             store.set('text-outline-color', "#000000")
@@ -109,6 +123,7 @@
             reflectColorPicker();
             reflectFontsize();
             reflectTextSpeed();
+            reflectShowOutline();
         }
     </script>
 </body>

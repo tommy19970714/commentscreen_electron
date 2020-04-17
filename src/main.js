@@ -1,20 +1,16 @@
 'use strict';
 
 const electron = require('electron');
+const { is } = require('electron-util');
 const {app, ipcMain, BrowserWindow, Menu, MenuItem} = electron;
 require('./auto-update');
 
 const socket = require('./mysocket');
 const screens = require('./screens');
-const Store = require('./store.js');
+const Store = require('electron-store');
+const store = new Store()
 const twitter = require('./twitterstream.js');
 
-const store = new Store({
-  configName: 'CommentScreen',
-  defaults: {
-    TagName: ''
-  }
-});
 
 // Menu template
 const template = [
@@ -132,7 +128,6 @@ function createWindow () {
     mainWindow = null;
     quit();
   })
-  // mainWindow.webContents.openDevTools();
   mainWindow.webContents.once('dom-ready', () => {
     const tag = store.get('TagName');
     startSession(tag);
@@ -167,7 +162,7 @@ function renewFrontWindows() {
 }
 
 function quit() {
-  if (process.platform !== 'darwin') {
+  if (!is.macos) {
     app.quit();
   }
 }
