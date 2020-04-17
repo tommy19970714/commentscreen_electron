@@ -127,7 +127,6 @@ function createWindow () {
     mainWindow = null;
     quit();
   })
-  // mainWindow.webContents.openDevTools();
   mainWindow.webContents.once('dom-ready', () => {
     const tag = store.get('TagName');
     startSession(tag);
