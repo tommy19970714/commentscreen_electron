@@ -1,15 +1,15 @@
 'use strict';
 
 const electron = require('electron');
-const { is } = require('electron-util');
 const {app, ipcMain, BrowserWindow, Menu, MenuItem} = electron;
+const { is } = require('electron-util');
+const Store = require('electron-store');
+const store = new Store()
 require('./auto-update');
 
 const socket = require('./mysocket');
 const screens = require('./screens');
-const Store = require('electron-store');
-const store = new Store()
-const twitter = require('./twitterstream.js');
+const twitter = require('./twitterstream');
 
 
 // Menu template
@@ -44,7 +44,7 @@ const template = [
   
   if (process.platform === 'darwin') {
     template.unshift({
-      label: app.getName(),
+      label: app.name,
       submenu: [
         { role: 'about' },
         { type: 'separator' },
