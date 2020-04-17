@@ -16,10 +16,10 @@ exports.recieve = function (text) {
 }
 
 exports.closeFrontWindows = function () {
-    for (var win in frontWindows) {
-        win.close();
+    for (var i in frontWindows) {
+        frontWindows[i].close();
     }
-    var frontWindows = new Array();
+    frontWindows = new Array();
 }
 
 exports.createFrontWindows = function () {
@@ -56,4 +56,9 @@ exports.createFrontWindows = function () {
         win.show();
         frontWindows.push(win);
     }
+}
+
+exports.getFrontWindowsLength = function () {
+    // for debug
+    return frontWindows.length
 }

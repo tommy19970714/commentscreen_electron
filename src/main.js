@@ -159,6 +159,7 @@ function renewFrontWindows() {
   console.log("renew windows");
   screens.closeFrontWindows();
   screens.createFrontWindows();
+  console.log(screens.getFrontWindowsLength());
 }
 
 function quit() {
