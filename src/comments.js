@@ -21,7 +21,7 @@ class CommentStage {
         this.emojis = emojis;
         createjs.Ticker.timingMode = createjs.Ticker.RAF
         createjs.Ticker.addEventListener("tick", function () {
-            var speed = store.get('text-speed') || 1;
+            var speed = store.get('text-speed') || 2;
             for (var y = 0; y < lines.length; y++) {
                 let line = lines[y];
                 for (var z = 0; z < line.length; z++) {
