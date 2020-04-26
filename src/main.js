@@ -96,7 +96,7 @@ function startSession(tag) {
   });
   twitter.start(tag, (text) => {
     screens.recieve(text);
-    mainWindow.webContents.send('receive', text);
+    mainWindow.webContents.send('receive', text.replace(/\r?\n/g,''));
   });
 };
 
