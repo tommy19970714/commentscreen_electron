@@ -120,8 +120,8 @@ app.commandLine.appendSwitch("ignore-certificate-errors");
 function createWindow () {
   mainWindow = new BrowserWindow({ width: 520, height: 600 });
   mainWindow.loadFile('static/index.html');
-  let updateWindow = new BrowserWindow({ width: 450, height: 400 });
-  updateWindow.loadFile('static/update.html');
+  //let updateWindow = new BrowserWindow({ width: 450, height: 400 });
+  //updateWindow.loadFile('static/update.html');
   // mainWindow.webContents.openDevTools()
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
