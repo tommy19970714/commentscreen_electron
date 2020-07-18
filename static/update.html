@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/17.0.16/i18next.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/3.2.0/i18nextXHRBackend.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/3.0.3/i18nextBrowserLanguageDetector.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.js"></script>
+
+    <script>
+        i18next
+            .use(i18nextXHRBackend)
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+                defaultLng: 'en',
+                fallbackLng: false,
+                debug: false,
+                backend: {
+                    loadPath: './locales/{{lng}}/common.json'
+                }
+            }, function (err, t) {
+                jqueryI18next.init(i18next, $);
+                $('[data-i18n]').localize();
+            });
+        const { shell } = require('electron');
+        async function openCommentScreen() {
+            var url = 'https://www.microsoft.com/store/productId/9ND2BQ5C9XF2'
+            await shell.openExternal(url);
+        }
+    </script>
+
+</head>
+
+<body>
+    
+    <div id="container" class="container">
+        <h2>大幅アップデートがありました．</h2>
+        最新バージョンはMicrosoftStoreからダウンロードしてください．一週間後に現在のバージョンは使用できなくなります．<br>
+        <a href="javascript:openCommentScreen();">https://www.microsoft.com/store/productId/9ND2BQ5C9XF2</a>
+
+        <br><br>
+        Please update to the latest version from MicrosoftStore. The current version is not available.
+
+    </div>
+</body>
+
+</html>
