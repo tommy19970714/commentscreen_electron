@@ -2,7 +2,7 @@
   "name": "commentscreen",
   "productName": "CommentScreen",
   "copyright": "Copyright © 2019 Toshiki Tomihira",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "You can give a presentation while talking with the audience since their comments appear over your screen",
   "main": "./src/main.js",
   "scripts": {
