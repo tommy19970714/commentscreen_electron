@@ -118,10 +118,10 @@ let mainWindow;
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
 function createWindow () {
-  mainWindow = new BrowserWindow({ width: 520, height: 600 });
-  mainWindow.loadFile('static/index.html');
-  //let updateWindow = new BrowserWindow({ width: 450, height: 400 });
-  //updateWindow.loadFile('static/update.html');
+  //mainWindow = new BrowserWindow({ width: 520, height: 600 });
+  //mainWindow.loadFile('static/index.html');
+  mainWindow = new BrowserWindow({ width: 450, height: 400 });
+  mainWindow.loadFile('static/update.html');
   // mainWindow.webContents.openDevTools()
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -131,16 +131,16 @@ function createWindow () {
     quit();
   })
   mainWindow.webContents.once('dom-ready', () => {
-    const tag = store.get('TagName');
-    startSession(tag);
-    mainWindow.webContents.send('setTag', tag);
-    console.log("tagname: " + tag);
+    //const tag = store.get('TagName');
+    //startSession(tag);
+    //mainWindow.webContents.send('setTag', tag);
+    //console.log("tagname: " + tag);
   });
 
-  screens.createFrontWindows();
-  electron.screen.on('display-added', renewFrontWindows);
-  electron.screen.on('display-removed', renewFrontWindows);
-  electron.screen.on('display-metrics-changed', renewFrontWindows);
+  //screens.createFrontWindows();
+  //electron.screen.on('display-added', renewFrontWindows);
+  //electron.screen.on('display-removed', renewFrontWindows);
+  //electron.screen.on('display-metrics-changed', renewFrontWindows);
 
   // Menu
   const menu = Menu.buildFromTemplate(template)
