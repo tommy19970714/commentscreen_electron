@@ -2,7 +2,7 @@
   "name": "commentscreen",
   "productName": "CommentScreen",
   "copyright": "Copyright © 2019 Toshiki Tomihira",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "You can give a presentation while talking with the audience since their comments appear over your screen",
   "main": "./src/main.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^4.1.4",
-    "electron-builder": "^20.39.0"
+    "electron-builder": "^20.44.4"
   },
   "dependencies": {
     "electron-log": "^3.0.5",
